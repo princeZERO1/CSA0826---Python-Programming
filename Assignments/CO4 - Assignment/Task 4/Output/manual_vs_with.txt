@@ -1,0 +1,6 @@
+manual      :  235.0 microseconds per call, peak   22.9 KiB
+with_stmt   :  240.8 microseconds per call, peak   17.7 KiB
+
+Open files left behind after 50 errors (the exceptions are kept, as a logger or test runner would):
+  manual_no_finally : files still open = 50
+  with_error        : files still open = 0

@@ -1,0 +1,8 @@
+Log after three days:
+'NetworksOS Concepts'
+
+Defect 3: write() fails halfway (a non-string book) -> does close() run?
+TypeError: write() argument must be str, not int
+file closed after the error? -> False
+
+Defect 4: a different error (UnicodeDecodeError) is not handled and nothing is logged

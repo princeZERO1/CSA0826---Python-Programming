@@ -1,0 +1,11 @@
+results: [True, True, False, False, True]
+returns.log:
+Python Basics
+Data Structures
+Algorithms
+Databases
+Networks
+OS Concepts
+errors.log:
+ERROR missing file: missing.txt
+ERROR cannot process bad.txt: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
