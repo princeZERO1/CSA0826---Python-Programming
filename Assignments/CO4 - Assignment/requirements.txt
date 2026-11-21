@@ -1,0 +1,3 @@
+# No third-party packages are required: every program uses only the Python standard library
+# (pathlib, os, decimal, logging, tempfile, time, tracemalloc, timeit, importlib, sys).
+# Tested with Python 3.13.
