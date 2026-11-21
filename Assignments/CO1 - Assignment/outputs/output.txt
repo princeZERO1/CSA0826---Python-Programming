@@ -1,0 +1,142 @@
+============================================================
+$ python task12_design_challenge.py
+============================================================
+================================================================
+TASK 12 – Day-4 Design Challenge
+================================================================
+
+══════════════════════════════════════════════════════════════════
+A. IMPACT ANALYSIS
+══════════════════════════════════════════════════════════════════
+
+What has changed from the original problem
+───────────────────────────────────────────
+1. PRECISION  Fat and SNF now carry TWO decimal places (e.g. 4.25 %)
+   instead of one.  Steps are still 0.1 %, so 4.25 is 7.5 steps above
+   3.5.  round(7.5) in Python uses "banker's rounding" (round-half-to-even)
+   → round(7.5) = 8.  Whether to round to the nearest step or charge
+   exactly must be decided; the co-operative must state the rule.
+
+2. SEASONAL RATES  Two different rate cards must be supported:
+      Non-peak   : base=30.00, fat_step=0.40, snf_step=0.30
+      Peak (Apr–Jun): base=32.00, fat_step=0.45, snf_step=0.30
+   The original single set of module constants cannot hold both.
+
+3. BONUS  A new computation is added after the ten-day total is known:
+      if total_litres > 500: bonus = total_litres × 0.50
+   This requires storing or accumulating total litres per farmer per period,
+   which the original design did not do.
+
+Which constants, expressions and functions are affected
+───────────────────────────────────────────────────────
+• Constants  : BASE_RATE, FAT_STEP_VALUE must be season-dependent.
+• rate_per_litre() : step calculation unchanged (still round); precision
+  of fat/snf changes from 1 dp to 2 dp → Decimal(str(fat)) handles this
+  already, so no code change needed in the expression itself.
+• payout()   : unchanged – multiplies rate × litres.
+• NEW function needed: bonus_payout(total_litres) → Decimal.
+• ten_day_total() : must also accumulate total_litres to trigger bonus.
+
+How two-decimal readings change step calculation
+─────────────────────────────────────────────────
+  fat = 4.25 %  → (4.25 − 3.5) / 0.1 = 7.5 steps
+  Python round(7.5) = 8  (banker's rounding, rounds to even)
+  Python round(7.4999) = 7
+  Recommendation: use round(half_steps) and document that mid-step values
+  are rounded to the nearest even step (consistent with the Indian
+  Weights & Measures standard).
+
+
+══════════════════════════════════════════════════════════════════
+B. EVALUATION OF ORIGINAL DESIGN
+══════════════════════════════════════════════════════════════════
+
+  Original rate_per_litre with two-decimal fat/snf:
+    fat=4.25, snf=8.73: steps=(8,2) → rate=33.80
+    fat=3.15, snf=8.45: steps=(-4,0) → rate=28.40
+    fat=4.75, snf=9.05: steps=(12,6) → rate=36.60
+
+  VERDICT:
+    • rate_per_litre(): WORKS for 2-dp readings – Decimal(str(fat)) handles
+      any precision; round() rounds correctly to nearest 0.1 step.
+    • payout(): WORKS – no change needed.
+    • Constants BASE_RATE, FAT_STEP_VALUE: NEED CHANGE – must be season-aware.
+    • ten_day_total(): NEEDS EXTENSION – must return total litres for bonus.
+    • bonus_payout(): MISSING – must be added.
+    Decision: MODIFY (not redesign) – the core expressions are correct;
+    only constants and two functions need extension.
+
+
+══════════════════════════════════════════════════════════════════
+C. ADAPTATION – Revised Design
+══════════════════════════════════════════════════════════════════
+
+
+══════════════════════════════════════════════════════════════════
+D. EVIDENCE-BASED DEFENCE
+══════════════════════════════════════════════════════════════════
+
+── Test 1: Two-decimal fat/SNF readings ──────────────────────
+     fat    snf  non_peak rate    peak rate
+  ──────────────────────────────────────────
+    4.25   8.73          33.80        36.20
+    3.15   8.45          28.40        30.20
+    4.75   9.05          36.60        39.20
+    3.50   8.50          30.00        32.00
+
+── Test 2: Same entry in both seasons ────────────────────────
+  Season=non_peak  base=30.00  fat_step=0.40
+    Payment subtotal : Rs 917.50
+    Total litres     :    30.5 L  (bonus threshold: 500 L)
+    Bonus            : Rs 0.00
+    Grand total      : Rs 917.50
+  Season=peak      base=32.00  fat_step=0.45
+    Payment subtotal : Rs 979.08
+    Total litres     :    30.5 L  (bonus threshold: 500 L)
+    Bonus            : Rs 0.00
+    Grand total      : Rs 979.08
+
+── Test 3: Bonus trigger (> 500 L in 10 days) ───────────────
+  60 × 9.0 L = 540.00 L  > 500 L  → bonus = Rs 270.00
+  Payment subtotal : Rs 16200.00
+  Bonus (540×0.50) : Rs 270.00
+  Grand total      : Rs 16470.00
+  ✓ Bonus verified: 540 × 0.50 = Rs 270.00
+
+── Test 4: No bonus for ≤ 500 L ─────────────────────────────
+  55 × 9.0 L = 495.00 L  ≤ 500 L  → bonus = Rs 0.00
+  ✓ No bonus correctly applied.
+
+── Test 5: Mid-step fat=4.25 (7.5 steps above 3.5) ──────────
+  raw steps  = 7.5  → round(7.5) = 8
+  rate (non_peak) = 33.20
+  rate (peak)     = 35.60
+  Python uses banker's rounding (round-half-to-even): 7.5 → 8.
+  The co-operative should document this rule in their SOP.
+
+── Timing: original vs v2 at 6,000 entries ──────────────────
+  v2 (6,000 entries, peak season) : 0.0189 s
+  Payment subtotal : Rs 2756189.43
+  Total litres     :    75793.3 L
+  Bonus            : Rs 37896.65
+  Grand total      : Rs 2794086.08
+
+── Trade-offs of the MODIFY decision ────────────────────────────
+  ✓ Core expressions (rate_per_litre, payout) are unchanged – proven correct.
+  ✓ Decimal(str(fat)) already handles 2-dp input without code change.
+  ✓ Season parameter keeps one code path; a dictionary of cards is O(1) lookup.
+  ✓ bonus_payout() is a new, isolated function – easy to test independently.
+  ✗ The rate-card dictionary grows if more seasons or farmer categories are
+    added; a JSON file or database table would then be preferable (see Task 11).
+  ✗ Banker's rounding at mid-step must be agreed with the co-operative and
+    documented; a different rounding rule may require changing round() to
+    Decimal.quantize(ROUND_HALF_UP) throughout.
+
+FINAL DECISION: MODIFY is the right choice.
+  The original module structure, Decimal arithmetic, per-payment rounding,
+  and validate_entry() are all correct and retained.  Three targeted changes
+  suffice: (1) replace single constants with a SEASONS dictionary, (2) add a
+  season parameter to rate_per_litre and ten_day_total, (3) add bonus_payout().
+  No rewrite of the core calculation is needed.
+
+
