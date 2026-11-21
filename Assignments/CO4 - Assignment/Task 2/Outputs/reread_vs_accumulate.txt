@@ -1,0 +1,4 @@
+s=100, f=20, l=100: lines parsed  one-pass=2000  per-student=200000
+one pass     :     29.5 ms
+per student  :    715.4 ms   (24x slower)
+same answer  : True
