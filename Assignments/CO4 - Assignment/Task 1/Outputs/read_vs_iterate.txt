@@ -1,0 +1,4 @@
+by_read      : lines=50000  time=   59.8 ms  peak memory=   5402.7 KiB
+by_readlines : lines=50000  time=   45.6 ms  peak memory=   3956.2 KiB
+by_iteration : lines=50000  time=   70.7 ms  peak memory=     33.3 KiB
+file size on disk: 1551.7 KiB
