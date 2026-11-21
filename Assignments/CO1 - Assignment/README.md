@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Name** | `<Your Full Name>` |
-| **Register Number** | `<Your Register Number>` |
+| **Name** | N. Prince Raj |
+| **Register Number** | 192312284 |
 | **Python Version** | Python 3.12 |
 | **Course** | CSA08 – Python Programming |
 | **Assignment** | Assignment 1 – CO1 |
