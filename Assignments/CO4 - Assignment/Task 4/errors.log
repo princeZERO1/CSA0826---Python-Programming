@@ -1,0 +1,2 @@
+2026-11-21 04:41:54,967 ERROR missing file: missing.txt
+2026-11-21 04:41:54,968 ERROR cannot process bad.txt: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
