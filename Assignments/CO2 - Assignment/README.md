@@ -1,8 +1,8 @@
 # CSA08 – Assignment 2 (CO2)
 ## Control Flow, String Operations and Functions
 
-**Name:** [Your Name]  
-**Register Number:** [Your Register Number]  
+**Name:** [N. Prince Raj]  
+**Register Number:** [192312284]  
 **Python Version:** Python 3.12  
 **Libraries Used:** `functools`, `re`, `time`, `io`, `sys` (all standard library – no pip install needed)
 
