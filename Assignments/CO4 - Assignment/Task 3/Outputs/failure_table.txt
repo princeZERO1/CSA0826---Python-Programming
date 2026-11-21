@@ -1,0 +1,10 @@
+missing folder         -> FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\Prince\\AppData\\Local\\Temp\\tmpgbujhmab\\nofolder'
+missing file           -> FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Prince\\AppData\\Local\\Temp\\tmpgbujhmab\\nofile.txt'
+permission denied      -> NOT demonstrable here: this system does not enforce chmod here (root user or Windows).  A normal user gets PermissionError: [Errno 13] Permission denied.
+wrong encoding         -> UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 0: invalid continuation byte
+damaged: 2 fields      -> ValueError: not enough values to unpack (expected 3, got 2)
+damaged: index         -> IndexError: list index out of range
+damaged: int('x')      -> ValueError: invalid literal for int() with base 10: 'P'
+   read() of empty file gives ''
+empty file read        -> no exception
+open a directory       -> PermissionError: [Errno 13] Permission denied: 'C:\\Users\\Prince\\AppData\\Local\\Temp\\tmpgbujhmab'

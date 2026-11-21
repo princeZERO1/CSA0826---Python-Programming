@@ -1,0 +1,13 @@
+[else] attendance_2026-10-07.txt opened and read (6 lines)
+[finally] cleanup done for attendance_2026-10-07.txt
+(3, 1, [(2, "wrong number of fields in '192311002,2026-10-07'", "ValueError('not enough values to unpack (expected 3, got 2)')"), (4, "invalid status 'X'", 'None')])
+[except] file not found: missing_file.txt
+[finally] cleanup done for missing_file.txt
+(0, 0, [])
+[else] empty.txt opened and read (0 lines)
+[else] file is empty
+[finally] cleanup done for empty.txt
+(0, 0, [])
+[except] wrong encoding in latin.txt: invalid continuation byte
+[finally] cleanup done for latin.txt
+(0, 0, [])

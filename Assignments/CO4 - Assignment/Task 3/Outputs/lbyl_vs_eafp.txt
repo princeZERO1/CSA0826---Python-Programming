@@ -1,0 +1,4 @@
+rare bad (0%)     eafp  :   245.1 ns per line
+rare bad (0%)     lbyl  :   294.3 ns per line
+common bad (50%)  eafp  :   611.1 ns per line
+common bad (50%)  lbyl  :   238.2 ns per line

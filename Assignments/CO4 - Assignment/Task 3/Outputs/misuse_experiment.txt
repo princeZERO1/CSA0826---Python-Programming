@@ -1,0 +1,2 @@
+Misused handler : present = 0 (correct answer is 2) -- no error shown
+Specific handler: NameError surfaced -> cannot access local variable 'presnt' where it is not associated with a value
