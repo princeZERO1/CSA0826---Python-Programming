@@ -3,8 +3,8 @@ Robust data processing with files, exceptions, modules and packages
 
 | | |
 |---|---|
-| Name | ______________ |
-| Register number | ______________ |
+| Name | N. Prince Raj |
+| Register number | 192312284 |
 | Python version | 3.13 (any Python 3.10+ should work) |
 | Libraries | standard library only (see `requirements.txt`) |
 
