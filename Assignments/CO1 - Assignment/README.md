@@ -142,5 +142,4 @@ cd Q12 && python task12_design_challenge.py
 
 ---
 
-## GitHub Repository Link
-`https://github.com/<your-username>/CSA08-<RegisterNumber>-Assignment1`
+
